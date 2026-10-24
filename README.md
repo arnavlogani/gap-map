@@ -1,24 +1,14 @@
 # Gap Map
 
-A ZCTA-level model of where food need exceeds food supply on Long Island (Nassau and Suffolk counties), built on Palantir Foundry for PanRelief.
-
-## Map
-
-*Need map by census tract. First image lands Oct 25, 2026.*
-
-## Findings
-
-- (filled after milestone 1)
-- 
-- 
+A ZCTA-level heatmap of food insecurity on Long Island (Nassau and Suffolk counties), built on Palantir Foundry for PanRelief.
 
 ## How it works
 
 Three layers, each its own pipeline:
 
-1. **Need** — public indicators of food insecurity (SNAP, WIC, free lunch, 211 calls, Feeding America / USDA estimates, ACS poverty and income), harmonized to a common geography and combined into a per-area rate.
+1. **Need** — public indicators of food insecurity (SNAP, WIC, free lunch, 211 calls, Feeding America / USDA estimates, ACS poverty and income), harmonized to a common geography and modeled into a per-area rate. 
 2. **Supply** — pantry and agency locations, hours and capacity.
-3. **Gap** — need minus supply, mapped.
+3. **Gap** — need versus supply, mapped.
 
 Pipeline: raw uploads → Pipeline Builder (select, cast, union) → need dataset → ontology (six object types) → map. Decisions and rejected alternatives are logged in `docs/methodology.md`.
 
@@ -35,17 +25,11 @@ Pipeline: raw uploads → Pipeline Builder (select, cast, union) → need datase
 
 See [`data/sources.md`](data/sources.md).
 
-## Limitations
-
-- Public data only. No partner data (Island Harvest, Echos) and no raw 211 records are used or committed.
-- SNAP data is currently at ZCTA; crosswalk to tract is pending.
-- Survey-based rates (Feeding America, USDA) carry wide confidence intervals at small geographies.
-
 ## Status
 
 | Milestone | Date | Status |
 |---|---|---|
-| 1. Need map | Oct 25 | in progress |
+| 1. Need map | Oct 26 | in progress |
 | 2. Gap map | Nov 1 | |
 | 3. Hot zones | Nov 8 | |
 | 4. Docs | Nov 11 | |
