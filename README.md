@@ -1,6 +1,6 @@
 # Gap Map
 
-A tract-level model of where food need exceeds food supply on Long Island (Nassau and Suffolk counties), built on Palantir Foundry for PanRelief.
+A ZCTA-level model of where food need exceeds food supply on Long Island (Nassau and Suffolk counties), built on Palantir Foundry for PanRelief.
 
 ## Map
 
