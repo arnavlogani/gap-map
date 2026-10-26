@@ -1,20 +1,19 @@
 # Gap Map
 
-A ZCTA-level heatmap of food insecurity on Long Island (Nassau and Suffolk counties), built on Palantir Foundry for PanRelief.
+A ZCTA-level heatmap of food insecurity on Long Island (Nassau and Suffolk counties), built on Palantir Foundry. For PanRelief 501(c)(3).
 
 ## How it works
 
-Three layers, each its own pipeline:
+Three layers:
 
-1. **Need** — public indicators of food insecurity (SNAP, WIC, free lunch, 211 calls, Feeding America / USDA estimates, ACS poverty and income), harmonized to a common geography and modeled into a per-area rate. 
-2. **Supply** — pantry and agency locations, hours and capacity.
-3. **Gap** — need versus supply, mapped.
+1. **Need**:  Existing measurements of food insecuirty (Feeding America / USDA) + Direct and Indirect indicators of food insecurity (SNAP, WIC, free lunch, 211 calls, ACS poverty, Income, Seniors etc...). Modeled into a conclusion about Food Insecurity per Zip Code Tablulation Area (ZCTA).
 
-Pipeline: raw uploads → Pipeline Builder (select, cast, union) → need dataset → ontology (six object types) → map. Decisions and rejected alternatives are logged in `docs/methodology.md`.
+2. **Supply**: Food bank, pantry and agency locations + their hours and capacity.
+
+3. **Gap**: Need versus supply. Geo-Pointed and put on a Heatmap.
 
 ## Repo layout
-
-| Path | What it holds |
+| Path | Description |
 |---|---|
 | `transforms/` | Code copied out of Foundry at the end of each session (`need/`, `supply/`, `gap/`). Pipeline Builder graphs are documented in `docs/` as screenshots + step lists. |
 | `ontology/` | The object types and links. |
