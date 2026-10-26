@@ -6,9 +6,9 @@ Where on Long Island does food need exceed food supply, at the smallest geograph
 
 ## Unit of analysis
 
-Target: census tract. Current: ZCTA (what the SNAP data ships at). School district is a fallback for school-based indicators.
+Target: ZCTA. School district and Census tract are still being considered.
 
-### Why not household
+### Why not household data?
 
 Decision made Oct 2026, after starting from the assumption that more granular was better.
 
@@ -38,16 +38,6 @@ No Data Connection needed: all sources are public files downloaded and uploaded 
 
 ## Pipeline log
 
-### 2026-10 · SNAP by ZCTA (Pipeline Builder)
+### 2026-10-25 · SNAP by ZCTA (Pipeline Builder)
 
-Inputs: 7 ACS files (Nassau ×3, Suffolk ×4), each ZCTA-grain.
-
-Steps:
-1. Select columns on each input: households, below/above poverty, median income, SNAP recipients (est, MOE, pct), non-recipients (est, MOE, pct).
-2. **Union** the seven into one dataset, `SNAP_ZCTA`.
-
-Why union, not join: all seven inputs are at the same grain (one row per ZCTA, disjoint ZCTA ranges). A join would stack columns and create many-to-many duplicates; the goal is to add rows and keep the grain, which is a union.
-
-Next: row filtering (drop margin-of-error rows and totals), then ZCTA → tract crosswalk.
-
-*Graph screenshot: `docs/img/pipeline-snap-zcta.png` (add).*
+*Graph screenshot: Coming Soon*
