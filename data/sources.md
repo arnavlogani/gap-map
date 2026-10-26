@@ -8,8 +8,8 @@ Geography codes: ZCTA = ZIP Code Tabulation Area · tract = census tract · SD =
 
 | Dataset | Source | URL | Geography | Columns kept | Date pulled | Refresh cadence | Feeds |
 |---|---|---|---|---|---|---|---|
-| SNAP + poverty + income, Nassau (3 files: 11001–11545, 11547–11579, 11580–11804) | US Census, ACS (table S2201 / B22010 — confirm) | data.census.gov | ZCTA (24) | households, below/above poverty, median income, SNAP recipient est + MOE + pct, non-SNAP est + MOE + pct | | ACS 5-yr, annual | need |
-| SNAP + poverty + income, Suffolk (4 files) | US Census, ACS (same table) | data.census.gov | ZCTA (27) | same | | ACS 5-yr, annual | need |
+| SNAP + poverty + income, Nassau | US Census, ACS (table S2201 / B22010 — confirm) | data.census.gov | ZCTA (24) | households, below/above poverty, median income, SNAP recipient est + MOE + pct, non-SNAP est + MOE + pct | | ACS 5-yr, annual | need |
+| SNAP + poverty + income, Suffolk | US Census, ACS (same table) | data.census.gov | ZCTA (27) | same | | ACS 5-yr, annual | need |
 
 ## Need layer — identified, not yet ingested
 
