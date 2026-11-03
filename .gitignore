@@ -221,6 +221,7 @@ __marimo__/
 
 # gap-map: never commit data or secrets
 data/raw/
+data/processed
 data/*.csv
 data/*.xlsx
 data/*.geojson
