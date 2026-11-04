@@ -1,28 +1,17 @@
 # Gap Map
 
-A ZCTA-level heatmap of food insecurity on Long Island (Nassau and Suffolk counties), built on Palantir Foundry. For PanRelief 501(c)(3).
+**Where on Long Island is food needed most, and is it reaching those places?**
 
-## How it works
+Gap Map shades every ZIP code area in Nassau and Suffolk counties by how many people are food insecure, then compares that need to where food banks and pantries actually are. Built for PanRelief, a 501(c)(3), so it can direct food, volunteers, and outreach to the areas with the biggest gap.
 
-Three layers:
+<!-- Hero map: docs/journal/<latest>/map.png -->
+*Map coming soon.*
 
-1. **Need**:  Existing measurements of food insecuirty (Feeding America / USDA) + Direct and Indirect indicators of food insecurity (SNAP, WIC, free lunch, 211 calls, ACS poverty, Income, Seniors etc...). Modeled into a conclusion about Food Insecurity per Zip Code Tablulation Area (ZCTA).
+## What you're looking at
 
-2. **Supply**: Food bank, pantry and agency locations + their hours and capacity.
-
-3. **Gap**: Need versus supply. Geo-Pointed and put on a Heatmap.
-
-## Repo layout
-| Path | Description |
-|---|---|
-| `transforms/` | Code copied out of Foundry at the end of each session (`need/`, `supply/`, `gap/`). Pipeline Builder graphs are documented in `docs/` as screenshots + step lists. |
-| `ontology/` | The object types and links. |
-| `docs/` | Methodology, decision log, data governance, map images. |
-| `data/sources.md` | Every dataset: source, URL, geography, date pulled. The datasets themselves are never committed. |
-
-## Data sources
-
-See [`data/sources.md`](data/sources.md).
+- **Need:** the share of people in each ZIP code area who don't reliably have enough to eat.
+- **Supply:** food banks, pantries, and agencies, with their hours and capacity.
+- **Gap:** places where need is high and supply is low. These are the areas to act on first.
 
 ## Status
 
@@ -33,5 +22,9 @@ See [`data/sources.md`](data/sources.md).
 | 3. Hot zones | Nov 8 | |
 | 4. Docs | Nov 11 | |
 | 5. Ship | Nov 14 | |
+
+## How it was built
+
+Palantir Foundry and Python, using only public data. Every design decision, pipeline, and intermediate map is in the session journal. Start at [`docs/`](docs/README.md).
 
 Every line in this repo is written by hand.
