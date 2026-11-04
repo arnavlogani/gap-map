@@ -33,6 +33,10 @@ The journal is chronological, so **the most recent entry is the current state**.
 
 | Date | Entry | Decisions |
 |---|---|---|
+| 2026-10-11 | [Area-level rates, not households](journal/2026-10-11-area-rates-not-households/) | Map a rate per area, not flagged households |
+| 2026-10-14 | [Unit of analysis, storage, and ingestion](journal/2026-10-14-unit-storage-ingestion/) | ZCTA as the first unit · Foundry datasets, not Iceberg · Manual upload, no Data Connection |
+| 2026-10-18 | [SNAP by ZCTA](journal/2026-10-18-snap-by-zcta/) | Union the extracts, don't join them |
+| 2026-10-25 | [ZCTA polygons on a Foundry map](journal/2026-10-25-zcta-polygons/) | TIGER polygons, not lat/long points |
 
 ## Elsewhere in the repo
 
