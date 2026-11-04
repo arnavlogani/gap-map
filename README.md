@@ -2,10 +2,11 @@
 
 **Where on Long Island is food needed most, and is it reaching those places?**
 
-Gap Map shades every ZIP code area in Nassau and Suffolk counties by how many people are food insecure, then compares that need to where food banks and pantries actually are. Built for PanRelief, a 501(c)(3), so it can direct food, volunteers, and outreach to the areas with the biggest gap.
+Gap Map shades every ZIP code area in Nassau and Suffolk counties by a modeled estimate food insecurity, then compares that need to where food banks and pantries actually are. Built for PanRelief, a 501(c)(3), so it can direct food, volunteers, and outreach to the areas with the biggest gap.
 
-<!-- Hero map: docs/journal/<latest>/map.png -->
-*Map coming soon.*
+![Food insecurity by ZIP code area, Long Island](docs/journal/2026-11-04-places-need-layer-1/map-food-insecurity-crude.png)
+
+*Need, first layer: the share of adults who are food insecure in each ZIP code area. Darker means higher. The supply and gap layers come next.*
 
 ## What you're looking at
 

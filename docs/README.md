@@ -37,6 +37,7 @@ The journal is chronological, so **the most recent entry is the current state**.
 | 2026-10-14 | [Unit of analysis, storage, and ingestion](journal/2026-10-14-unit-storage-ingestion/) | ZCTA as the first unit · Foundry datasets, not Iceberg · Manual upload, no Data Connection |
 | 2026-10-18 | [SNAP by ZCTA](journal/2026-10-18-snap-by-zcta/) | Union the extracts, don't join them |
 | 2026-10-25 | [ZCTA polygons on a Foundry map](journal/2026-10-25-zcta-polygons/) | TIGER polygons, not lat/long points |
+| 2026-11-04 | [PLACES: need layer 1](journal/2026-11-04-places-need-layer-1/) | Two need layers, direct then indirect · PLACES properties, TIGER geometry · One object per ZCTA · Choropleth, not heatmap |
 
 ## Elsewhere in the repo
 
