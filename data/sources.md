@@ -8,9 +8,7 @@ Geography codes: ZCTA = ZIP Code Tabulation Area · tract = census tract · SD =
 
 | Dataset | Source | URL | Geography | Columns kept | Date pulled | Refresh cadence | Feeds |
 |---|---|---|---|---|---|---|---|
-| SNAP + poverty + income, Nassau | US Census, ACS (table S2201 / B22010 — confirm) | data.census.gov | ZCTA (24) | households, below/above poverty, median income, SNAP recipient est + MOE + pct, non-SNAP est + MOE + pct | | ACS 5-yr, annual | need |
-| SNAP + poverty + income, Suffolk | US Census, ACS (same table) | data.census.gov | ZCTA (27) | same | | ACS 5-yr, annual | need |
-| Food insecurity, SNAP, housing insecurity (+ ~35 other health measures) | CDC PLACES, 2025 release, ZCTA GIS-friendly format | https://data.cdc.gov/500-Cities-Places/PLACES-ZCTA-Data-GIS-Friendly-Format-2025-release/kee5-23sr | ZCTA (national, ~32.5k; 169 of 173 LI) | zcta5, foodinsecu_crudeprev (layer 1); crude 95% CIs and totalpop18plus planned for health checks | 2026-11-03 | annual | need |
+| Food insecurity, SNAP, housing insecurity (+ ~35 other health measures) | CDC PLACES, 2025 release, ZCTA GIS-friendly format | https://data.cdc.gov/500-Cities-Places/PLACES-ZCTA-Data-GIS-Friendly-Format-2025-release/kee5-23sr | ZCTA (national, ~32.5k; 171 of 175 LI) | zcta5, totalpop18plus, foodinsecu_crudeprev (direct measure). CIs not used | 2026-11-03 | annual | need (direct) |
 | SNAP receipt | US Census, ACS 5-yr 2020–2024, S2201 | https://data.census.gov/table/ACSST5Y2024.S2201 | ZCTA (175 LI requested, 173 returned) | S2201_C01_001E, S2201_C03_001E | 2026-11-10 | annual | need (indirect) |
 | Poverty: all, child, senior | US Census, ACS 5-yr 2020–2024, B17001 (S1701 not available for NY ZCTAs on data.census.gov) | https://data.census.gov/table/ACSDT5Y2024.B17001 | ZCTA (175 LI requested, 173 returned) | B17001_001E, _002E, under-18 and 65+ age groups | 2026-11-10 | annual | need (indirect) |
 | Median household income | US Census, ACS 5-yr 2020–2024, B19013 | https://data.census.gov/table/ACSDT5Y2024.B19013 | ZCTA (175 LI requested, 173 returned) | B19013_001E | 2026-11-10 | annual | need (indirect) |
@@ -38,8 +36,6 @@ The six ACS tables are pulled from the Census API by `transforms/need/fetch_acs.
 | Dataset | Source | URL | Notes |
 |---|---|---|---|
 | ZCTA boundaries | US Census TIGER/Line 2026, ZCTA5 (`tl_2026_us_zcta520`) | https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html | Shapefile, national. Filtered to LI and converted to GeoJSON by `transforms/geography/shapefile_to_geojson.py`. In use |
-| ZCTA boundaries, Long Island | ArcGIS Hub | https://hub.arcgis.com/datasets/85769018b43a4d1a96a4175a1e97d163_0 | GeoJSON export. Not used; replaced by TIGER |
-| ZCTA area + internal point lat/long | US Census | https://data.census.gov/table?q=latitude&g=860XX00US... | |
 | ZCTA → tract crosswalk | HUD USPS Crosswalk | | needed before need layer joins at tract |
 
 ## Supply layer — identified
