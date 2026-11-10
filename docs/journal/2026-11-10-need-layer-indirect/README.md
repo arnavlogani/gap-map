@@ -10,11 +10,16 @@ We used equal weights, as planned in the last entry. We tried weighting by judgm
 
 ## Outcome
 
-z_indirect is calculated for 169 of the 175 ZCTAs. The other 6 have too little data, including Brentwood (11717) and Wyandanch (11798), where the Census Bureau withheld 2023–2024 data after a collection error ([Errata #148](https://www.census.gov/programs-surveys/acs/technical-documentation/errata/148.html)). The indirect and direct outputs join on all 175 ZCTAs, and the two scores agree moderately (rank correlation 0.65). Four ZCTAs have only a direct score (11549, 11717, 11794, 11798), two have only an indirect score (11931, 11947), and two have neither (11042, 11973).
+z_indirect is calculated for 169 of the 175 ZCTAs. The other 6 have too little data:
+
+- **Brentwood (11717) and Wyandanch (11798):** the Census Bureau suppressed the 2019–2023 and 2020–2024 5-year estimates for these areas after a 2020 data collection error ([Errata #148](https://www.census.gov/programs-surveys/acs/technical-documentation/errata/148.html)).
+- **Hofstra (11549) and Stony Brook (11794):** college ZCTAs. Most residents live in dorms, which the Census counts as group quarters: they aren't households, and their poverty status isn't determined. With almost no households or poverty population, too few indicators are published, so these fall under the 4-of-7 rule.
+- **11042 and 11973:** very small or non-residential ZCTAs, also missing from PLACES.
+ The indirect and direct outputs join on all 175 ZCTAs, and the two scores agree moderately (rank correlation 0.65). Four ZCTAs have only a direct score (11549, 11717, 11794, 11798), two have only an indirect score (11931, 11947), and two have neither (11042, 11973).
 
 ## Open
 
-Children are only partly covered (through child poverty and household SNAP). School lunch and WIC data could fill that gap, but neither is available by ZCTA yet. The combined score needs a rule for the two ZCTAs with no data on either side; they should show as "no data" on the map. The map polygons were built before 11549 and 11709 were added to the ZCTA list, so `shapefile_to_geojson.py` needs to be re-run.
+Children are only partly covered (through child poverty and household SNAP). School lunch and WIC data could fill that gap, but neither is available by ZCTA yet. The combined score needs a rule for the two ZCTAs with no data on either side; they should show as "no data" on the map.
 
 ## Links
 

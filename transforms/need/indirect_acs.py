@@ -23,10 +23,34 @@ RATES = [
     "no_vehicle_rate",
 ]
 
-KIDS_BELOW = ["B17001_004E", "B17001_005E", "B17001_006E", "B17001_007E", "B17001_008E", "B17001_009E",
-              "B17001_018E", "B17001_019E", "B17001_020E", "B17001_021E", "B17001_022E", "B17001_023E"]
-KIDS_ABOVE = ["B17001_033E", "B17001_034E", "B17001_035E", "B17001_036E", "B17001_037E", "B17001_038E",
-              "B17001_047E", "B17001_048E", "B17001_049E", "B17001_050E", "B17001_051E", "B17001_052E"]
+KIDS_BELOW = [
+    "B17001_004E",
+    "B17001_005E",
+    "B17001_006E",
+    "B17001_007E",
+    "B17001_008E",
+    "B17001_009E",
+    "B17001_018E",
+    "B17001_019E",
+    "B17001_020E",
+    "B17001_021E",
+    "B17001_022E",
+    "B17001_023E",
+]
+KIDS_ABOVE = [
+    "B17001_033E",
+    "B17001_034E",
+    "B17001_035E",
+    "B17001_036E",
+    "B17001_037E",
+    "B17001_038E",
+    "B17001_047E",
+    "B17001_048E",
+    "B17001_049E",
+    "B17001_050E",
+    "B17001_051E",
+    "B17001_052E",
+]
 SENIORS_BELOW = ["B17001_015E", "B17001_016E", "B17001_029E", "B17001_030E"]
 SENIORS_ABOVE = ["B17001_044E", "B17001_045E", "B17001_058E", "B17001_059E"]
 
@@ -34,8 +58,13 @@ SENIORS_ABOVE = ["B17001_044E", "B17001_045E", "B17001_058E", "B17001_059E"]
 def load_acs(table):
     df = pd.read_csv(ACS_DIR / f"{table}-Data.csv", skiprows=[1])
     df["zcta5"] = df["GEO_ID"].str[-5:]
-    df = df[df["zcta5"].isin(ZCTAS)]
-    return df.set_index("zcta5")
+    df = df[df["zcta5"].isin(ZCTAS)].set_index("zcta5")
+    # Census writes top/bottom-coded medians as text ("250,000+", "2,500-") and
+    # missing estimates as "-" or "***". Keep the coded values, turn the rest to NaN.
+    df = df.replace({"250,000+": "250000", "2,500-": "2500"})
+    estimates = [c for c in df.columns if c.endswith("E") and c != "GEO_ID"]
+    df[estimates] = df[estimates].apply(pd.to_numeric, errors="coerce")
+    return df
 
 
 def check_inputs(df):
@@ -45,12 +74,16 @@ def check_inputs(df):
 
 def check_suppressed(df):
     # Census Errata #148: no 2023/2024 ACS for Brentwood and Wyandanch
-    assert df.loc[["11717", "11798"], RATES].isna().all().all(), "11717/11798 should be null"
+    assert df.loc[["11717", "11798"], RATES].isna().all().all(), (
+        "11717/11798 should be null"
+    )
 
 
 def check_rate_range(df):
     rates = df[[c for c in RATES if c != "median_income"]]
-    assert ((rates >= 0) & (rates <= 1) | rates.isna()).all().all(), "rates must be between 0 and 1"
+    assert ((rates >= 0) & (rates <= 1) | rates.isna()).all().all(), (
+        "rates must be between 0 and 1"
+    )
 
 
 def check_no_overlap(df):
@@ -78,8 +111,7 @@ def main():
 
     no_vehicle = veh["B25044_003E"] + veh["B25044_010E"]
 
-    income = inc["B19013_001E"].replace("250,000+", "250000")
-    income = pd.to_numeric(income, errors="coerce")
+    income = inc["B19013_001E"]
 
     df = pd.DataFrame(index=pd.Index(ZCTAS, name="zcta5"))
     df["snap_rate"] = snap["S2201_C03_001E"] / snap["S2201_C01_001E"]
