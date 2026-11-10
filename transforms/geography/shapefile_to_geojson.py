@@ -9,9 +9,8 @@ from pathlib import Path
 
 import geopandas
 
-from long_island_zctas import long_island_zctas
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
+ZCTAS = (REPO_ROOT / "data" / "raw" / "long_island_zctas.txt").read_text().split()
 SHAPEFILE = REPO_ROOT / "data" / "raw" / "location-data" / "tl_2026_us_zcta520"
 WGS84 = 4326
 
@@ -19,7 +18,7 @@ WGS84 = 4326
 def main():
 
     cleaned_list = []
-    for zcta in long_island_zctas:
+    for zcta in ZCTAS:
         cleaned_list.append(f"'{zcta}'")
 
     li_zcta_string = ",".join(cleaned_list)
