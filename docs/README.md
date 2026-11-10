@@ -38,6 +38,8 @@ The journal is chronological, so **the most recent entry is the current state**.
 | 2026-10-18 | [SNAP by ZCTA](journal/2026-10-18-snap-by-zcta/) | Union the extracts, don't join them |
 | 2026-10-25 | [ZCTA polygons on a Foundry map](journal/2026-10-25-zcta-polygons/) | TIGER polygons, not lat/long points |
 | 2026-11-04 | [PLACES: need layer 1](journal/2026-11-04-places-need-layer-1/) | Two need layers, direct then indirect · PLACES properties, TIGER geometry · One object per ZCTA · Choropleth, not heatmap |
+| 2026-11-09 | [Modeling the need layer](journal/2026-11-09-need-modeling/) | Combine direct and indirect with z-scores · Rules set before computing |
+| 2026-11-10 | [Need layer 2: indirect measures](journal/2026-11-10-need-layer-indirect/) | Seven ACS indicators, equal weights · Brentwood and Wyandanch null (Census suppression) |
 
 ## Elsewhere in the repo
 
