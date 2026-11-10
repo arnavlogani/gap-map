@@ -1,37 +1,21 @@
 # Gap Map
 
-A ZCTA-level heatmap of food insecurity on Long Island (Nassau and Suffolk counties), built on Palantir Foundry. For PanRelief 501(c)(3).
+**Where on Long Island is food needed most, and is it reaching those places?**
 
-## How it works
+Gap Map shades every ZIP code area in Nassau and Suffolk counties by a modeled estimate of food insecurity, then compares that need to where food banks and pantries actually are. Built for PanRelief, a 501(c)(3), so it can direct food, volunteers, and outreach to the areas with the biggest gap.
 
-Three layers:
+![Food insecurity by ZIP code area, Long Island](docs/journal/2026-11-04-places-need-layer-1/map-food-insecurity-crude.png)
 
-1. **Need**:  Existing measurements of food insecuirty (Feeding America / USDA) + Direct and Indirect indicators of food insecurity (SNAP, WIC, free lunch, 211 calls, ACS poverty, Income, Seniors etc...). Modeled into a conclusion about Food Insecurity per Zip Code Tablulation Area (ZCTA).
+*Need, first layer: the share of adults who are food insecure in each ZIP code area. Darker means higher. The supply and gap layers come next.*
 
-2. **Supply**: Food bank, pantry and agency locations + their hours and capacity.
+## What you're looking at
 
-3. **Gap**: Need versus supply. Geo-Pointed and put on a Heatmap.
+- **Need:** the share of people in each ZIP code area who don't reliably have enough to eat.
+- **Supply:** food banks, pantries, and agencies, with their hours and capacity.
+- **Gap:** places where need is high and supply is low. These are the areas to act on first.
 
-## Repo layout
-| Path | Description |
-|---|---|
-| `transforms/` | Code copied out of Foundry at the end of each session (`need/`, `supply/`, `gap/`). Pipeline Builder graphs are documented in `docs/` as screenshots + step lists. |
-| `ontology/` | The object types and links. |
-| `docs/` | Methodology, decision log, data governance, map images. |
-| `data/sources.md` | Every dataset: source, URL, geography, date pulled. The datasets themselves are never committed. |
+## How it was built
 
-## Data sources
-
-See [`data/sources.md`](data/sources.md).
-
-## Status
-
-| Milestone | Date | Status |
-|---|---|---|
-| 1. Need map | Oct 26 | in progress |
-| 2. Gap map | Nov 1 | |
-| 3. Hot zones | Nov 8 | |
-| 4. Docs | Nov 11 | |
-| 5. Ship | Nov 14 | |
+Palantir Foundry and Python, using only public data. Every design decision, pipeline, and intermediate map is in the session journal. Start at [`docs/`](docs/README.md).
 
 Every line in this repo is written by hand.
