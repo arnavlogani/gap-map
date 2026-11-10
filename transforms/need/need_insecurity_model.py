@@ -14,6 +14,9 @@ Weight rule: pick the w in the grid where need_score agrees equally with both
 sources (rank correlation with z_direct closest to rank correlation with z_indirect).
 That gives w = 0.6. Rule 6 fails (26.6% of ZCTAs change quintile across the grid),
 but we keep w = 0.6: only one ZCTA moves more than one quintile.
+
+Disagreement flag: ZCTAs where z_direct and z_indirect are 1.5 or more apart
+are also flagged low_confidence (the 9 largest disagreements).
 """
 
 from pathlib import Path
@@ -28,6 +31,7 @@ OUTPUT = REPO_ROOT / "data" / "processed"
 
 W_GRID = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8]  # rule 5: lean direct
 STABILITY_LIMIT = 0.10  # rule 6: under 10% of ZCTAs may change quintile
+DISAGREEMENT_LIMIT = 1.5  # |z_direct - z_indirect| at or above this is flagged
 
 INDICATORS = [
     "z_snap_rate",
@@ -243,7 +247,9 @@ def main():
 
     # phase 5: final table
     df["need_score"], both = combine(df, w)
-    df["low_confidence"] = df["low_confidence"] | ~both  # rule 7
+    disagree = df["disagreement"].abs() >= DISAGREEMENT_LIMIT
+    df["low_confidence"] = df["low_confidence"] | ~both | disagree  # rule 7 + disagreement
+    print(f"\n{disagree.sum()} ZCTAs flagged for disagreement:", ", ".join(df.loc[disagree, "zcta5"]))
     check_need_score(df)
 
     df["need_quintile"] = quintiles(df["need_score"])
