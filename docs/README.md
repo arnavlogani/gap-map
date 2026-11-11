@@ -41,6 +41,7 @@ The journal is chronological, so **the most recent entry is the current state**.
 | 2026-11-09 | [Modeling the need layer](journal/2026-11-09-need-modeling/) | Combine direct and indirect with z-scores · Rules set before computing |
 | 2026-11-10 | [Need layer 2: indirect measures](journal/2026-11-10-need-layer-indirect/) | Seven ACS indicators, equal weights · Brentwood and Wyandanch null (Census suppression) |
 | 2026-11-10 | [Need score: combine, test, finalize](journal/2026-11-10-need-score/) | One-sided rows use the other side, flagged · w = 0.6 kept though rule 6 failed · Large disagreements flagged |
+| 2026-11-10 | [Need layer in Foundry](journal/2026-11-10-need-layer-foundry/) | Polygons left of the join · Map need class, not score · Low confidence marked, not hidden |
 
 ## Elsewhere in the repo
 
