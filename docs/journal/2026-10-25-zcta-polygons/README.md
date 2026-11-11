@@ -22,7 +22,7 @@ Before more transformation, the first priority was getting a real map into Found
 
 [`transforms/geography/shapefile_to_geojson.py`](../../../transforms/geography/shapefile_to_geojson.py):
 
-1. Read the 2026 TIGER ZCTA shapefile, filtered to the Long Island list in [`long_island_zctas.py`](../../../transforms/geography/long_island_zctas.py).
+1. Read the 2026 TIGER ZCTA shapefile, filtered to the Long Island ZCTA list (kept locally, not in the repo).
 2. Reproject from NAD83 to WGS84 (EPSG:4326), which web maps expect.
 3. Write `data/processed/li-zcta.geojson` and upload it to Foundry.
 

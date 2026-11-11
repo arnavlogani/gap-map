@@ -78,7 +78,7 @@ The darkest areas are around Hempstead, Brentwood, and Riverhead. Most of the No
   - CI width, median and 90th percentile (parse `foodinsecu_crude95ci` into lower and upper bounds)
   - ZCTAs with fewer than 500 adults, flagged as low confidence rather than dropped
   - duplicate `zcta5` count, which should be zero
-- **The Long Island ZCTA list is missing `11549` (Hempstead/Hofstra) and `11709` (Bayville).** Both are in TIGER and PLACES, and both were in the original Nassau list. Add them to [`long_island_zctas.py`](../../../transforms/geography/long_island_zctas.py), then regenerate and re-upload the polygons.
+- **The Long Island ZCTA list is missing `11549` (Hempstead/Hofstra) and `11709` (Bayville).** Both are in TIGER and PLACES, and both were in the original Nassau list. Add them to the Long Island ZCTA list, then regenerate and re-upload the polygons.
 - **The 4 ZCTAs not in PLACES** show as holes. Consider a left join from the ZCTA side so they appear as "no data".
 - **Layer 2:** indirect indicators from ACS (child and senior poverty, severe housing burden, zero-vehicle households), z-scored across Long Island ZCTAs, with signs flipped so a higher value always means more need. Run a correlation check to drop double-counted indicators.
 

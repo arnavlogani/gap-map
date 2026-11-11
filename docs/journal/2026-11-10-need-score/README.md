@@ -15,9 +15,9 @@ z_direct and z_indirect agree moderately: rank correlation 0.65, or 0.74 for ZCT
 
 ### Weight: w = 0.6
 
-- **Choice:** w = 0.6, the weight set in advance (rule 5: lean direct, since only PLACES measures food insecurity itself). It's also where need_score agrees about equally with both sources in the 0.5–0.8 grid (rank correlation 0.895 with direct, 0.904 with indirect).
+- **Choice:** the code picks w from the 0.5–0.8 grid: the weight where need_score's rank correlation with z_direct is closest to its rank correlation with z_indirect, so the score agrees about equally with both sources. That gives w = 0.6 (0.895 with direct, 0.904 with indirect), the same value rule 6 planned.
 - **Rule 6 failed:** 26.6% of ZCTAs (46 of 173) change quintile somewhere in the grid, above the 10% limit.
-- **Kept 0.6 anyway:** only one ZCTA moves more than one quintile. The other 45 move by one, at a quintile boundary.
+- **Used 0.6 anyway:** only one ZCTA moves more than one quintile. The other 45 move by one, at a quintile boundary.
 
 ### Flag large disagreements
 
@@ -46,7 +46,6 @@ z_direct and z_indirect agree moderately: rank correlation 0.65, or 0.74 for ZCT
 
 ## Open
 
-- Check ACS margins of error for the small ZCTAs that disagree.
 - The need layer on the Foundry map.
 
 ## Links
