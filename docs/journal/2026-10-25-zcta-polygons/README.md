@@ -2,31 +2,29 @@
 
 ## Found
 
-Before more transformation, the first priority was getting a real map into Foundry. The first attempt used each ZCTA's internal point (latitude and longitude from Census GEOINFO) as a geopoint. But ZCTAs are irregular areas, not points or circles around a radius, so that approach can't shade an area.
+First attempt: one geopoint per ZCTA from its Census GEOINFO internal lat/long. ZCTAs are irregular areas, so a point can't be shaded as one.
 
 ## Decided
 
 ### ZCTA polygons from TIGER, not lat/long points
 
-- **Options:**
-  1. A geopoint per ZCTA from its internal lat/long.
-  2. A polygon per ZCTA from the Census TIGER/Line shapefile.
-- **Choice:** polygons, pre-processed locally in Python and uploaded to Foundry as GeoJSON.
-- **Why:** a rate per area ([2026-10-11](../2026-10-11-area-rates-not-households/)) has to be drawn as a filled area, which needs the real boundary.
+- **Options:** a geopoint per ZCTA, or a polygon per ZCTA from the Census TIGER/Line shapefile.
+- **Choice:** polygons, pre-processed locally in Python and uploaded as GeoJSON.
+- **Why:** a rate per area ([2026-10-11](../2026-10-11-area-rates-not-households/)) needs the real boundary.
 - **Consequences:**
-  - This is the one step done outside Foundry, because Pipeline Builder doesn't read shapefiles directly.
-  - The national shapefile is large, so filtering before upload keeps the Foundry dataset small.
-  - The Long Island ZCTA list is a hand-maintained input, and it decides what's on the map.
+  - The only step outside Foundry. Pipeline Builder doesn't read shapefiles.
+  - Filtering before upload keeps the Foundry dataset small.
+  - The hand-maintained Long Island ZCTA list decides what's on the map.
 
 ## Built
 
 [`transforms/geography/shapefile_to_geojson.py`](../../../transforms/geography/shapefile_to_geojson.py):
 
-1. Read the 2026 TIGER ZCTA shapefile, filtered to the Long Island list in [`long_island_zctas.py`](../../../transforms/geography/long_island_zctas.py).
-2. Reproject from NAD83 to WGS84 (EPSG:4326), which web maps expect.
-3. Write `data/processed/li-zcta.geojson` and upload it to Foundry.
+1. Read the 2026 TIGER ZCTA shapefile, filtered to the Long Island ZCTA list (kept locally, not in the repo).
+2. Reproject NAD83 → WGS84 (EPSG:4326).
+3. Write `data/processed/li-zcta.geojson`; upload to Foundry.
 
-Learned along the way: terminal navigation, file paths, and Git (init vs. clone, add vs. commit, push vs. pull). This repo started here.
+Also learned: terminal navigation, file paths, Git. This repo started here.
 
 ## Outcome
 
