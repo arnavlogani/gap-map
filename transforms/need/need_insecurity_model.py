@@ -60,7 +60,10 @@ EXPECTED_NULLS = {
     "fi_rate": (4, "no PLACES estimate: 11042, 11931, 11947, 11973"),
     "est_food_insecure_adults": (4, "same 4 as fi_rate"),
     "z_direct": (4, "same 4 as fi_rate"),
-    "z_indirect": (6, "under 4 of 7 ACS indicators: 11042, 11549, 11717, 11794, 11798, 11973"),
+    "z_indirect": (
+        6,
+        "under 4 of 7 ACS indicators: 11042, 11549, 11717, 11794, 11798, 11973",
+    ),
     "need_score": (2, "both sides null: 11042, 11973"),
     "need_quintile": (2, "no need_score"),
 }
@@ -140,7 +143,9 @@ def combine(df, w):
 
 def quintiles(score):
     # rank first so ties split evenly; 1 = lowest need, 5 = highest
-    return pd.qcut(score.rank(method="first"), 5, labels=[1, 2, 3, 4, 5]).astype("Int64")
+    return pd.qcut(score.rank(method="first"), 5, labels=[1, 2, 3, 4, 5]).astype(
+        "Int64"
+    )
 
 
 def z_indirect_without(ind, drop):
@@ -172,8 +177,10 @@ def sensitivity(df, ind):
 
     changed = q_runs.nunique(axis=1) > 1
     pct = changed.mean()
-    spread = (q_runs.max(axis=1) - q_runs.min(axis=1))
-    print(f"\n{pct:.1%} of ZCTAs change quintile somewhere across the grid ({changed.sum()} of {len(q_runs)})")
+    spread = q_runs.max(axis=1) - q_runs.min(axis=1)
+    print(
+        f"\n{pct:.1%} of ZCTAs change quintile somewhere across the grid ({changed.sum()} of {len(q_runs)})"
+    )
     print(f"  moved 1 quintile: {(spread == 1).sum()}, moved 2+: {(spread >= 2).sum()}")
     print("  changed:", ", ".join(q.loc[changed[changed].index, "zcta5"]))
 
@@ -232,14 +239,22 @@ def main():
 
     # phase 3, step 20: ZCTAs furthest from the diagonal (z_direct = z_indirect)
     df["disagreement"] = df["z_direct"] - df["z_indirect"]
-    furthest = df.dropna(subset=["disagreement"]).sort_values("disagreement", key=abs, ascending=False)
+    furthest = df.dropna(subset=["disagreement"]).sort_values(
+        "disagreement", key=abs, ascending=False
+    )
     print("10 ZCTAs where direct and indirect disagree most:")
-    print(furthest[["zcta5", "adults", "z_direct", "z_indirect", "disagreement"]].head(10).to_string(index=False))
+    print(
+        furthest[["zcta5", "adults", "z_direct", "z_indirect", "disagreement"]]
+        .head(10)
+        .to_string(index=False)
+    )
 
     # phase 4: sensitivity
     q, pct = sensitivity(df, ind)
     stable = pct < STABILITY_LIMIT
-    print(f"\nRule 6 (under {STABILITY_LIMIT:.0%} change): {'PASS' if stable else 'FAIL'} at {pct:.1%}")
+    print(
+        f"\nRule 6 (under {STABILITY_LIMIT:.0%} change): {'PASS' if stable else 'FAIL'} at {pct:.1%}"
+    )
     q.to_csv(OUTPUT / "sensitivity.csv", index=False)
 
     w = choose_weight(df)
@@ -248,8 +263,13 @@ def main():
     # phase 5: final table
     df["need_score"], both = combine(df, w)
     disagree = df["disagreement"].abs() >= DISAGREEMENT_LIMIT
-    df["low_confidence"] = df["low_confidence"] | ~both | disagree  # rule 7 + disagreement
-    print(f"\n{disagree.sum()} ZCTAs flagged for disagreement:", ", ".join(df.loc[disagree, "zcta5"]))
+    df["low_confidence"] = (
+        df["low_confidence"] | ~both | disagree
+    )  # rule 7 + disagreement
+    print(
+        f"\n{disagree.sum()} ZCTAs flagged for disagreement:",
+        ", ".join(df.loc[disagree, "zcta5"]),
+    )
     check_need_score(df)
 
     df["need_quintile"] = quintiles(df["need_score"])
