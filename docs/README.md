@@ -8,11 +8,12 @@ A ZCTA-level map of food need vs. food supply on Long Island (Nassau and Suffolk
 
 **Question:** Where on Long Island does food need exceed food supply, at the smallest geographic unit where a food-insecurity rate can be estimated with a usable confidence interval?
 
-**Model:** three layers, each one rate per ZIP Code Tabulation Area (ZCTA).
+**Model:** three layers, one value per ZIP Code Tabulation Area (ZCTA).
 
-1. **Need.** Food insecurity per ZCTA.
-   - **Direct:** survey and modeled rates (CDC PLACES, Feeding America, USDA) and observed demand (SNAP, WIC, free lunch, food-related 211 calls).
-   - **Indirect:** risk proxies such as poverty, income, ALICE, housing cost burden, zero-vehicle households, and children and seniors.
+1. **Need.** A food-need score per ZCTA, mapped as quintiles (1–5).
+   - **Direct:** CDC PLACES modeled food-insecurity rate → `z_direct`.
+   - **Indirect:** 7 ACS indicators (SNAP receipt, poverty, child poverty, senior poverty, median income, severe housing burden, no vehicle), z-scored and averaged → `z_indirect`.
+   - **Score:** `0.6 × z_direct + 0.4 × z_indirect`, tested across weights 0.5–0.8.
 2. **Supply.** Food bank, pantry, and agency locations, with hours and capacity.
 3. **Gap.** Need minus supply, ranked per ZCTA.
 
@@ -21,8 +22,8 @@ A ZCTA-level map of food need vs. food supply on Long Island (Nassau and Suffolk
 | | |
 |---|---|
 | Platform | Palantir Foundry: datasets, Pipeline Builder, Ontology, Map, Workshop |
-| Local pre-processing | Python: geopandas, pandas |
-| Data | US Census ACS 5-year and TIGER/Line, CDC PLACES. All public, listed in [`data/sources.md`](../data/sources.md) |
+| Local processing | Python: pandas, geopandas, requests |
+| Data | US Census ACS 5-year (via the Census API) and TIGER/Line, CDC PLACES. All public, listed in [`data/sources.md`](../data/sources.md) |
 | Version control | Git and GitHub. Pipeline Builder graphs are recorded as screenshots and step lists in the journal |
 
 ## Journal
@@ -35,7 +36,7 @@ The journal is chronological, so **the most recent entry is the current state**.
 |---|---|---|
 | 2026-10-11 | [Area-level rates, not households](journal/2026-10-11-area-rates-not-households/) | Map a rate per area, not flagged households |
 | 2026-10-14 | [Unit of analysis, storage, and ingestion](journal/2026-10-14-unit-storage-ingestion/) | ZCTA as the first unit · Foundry datasets, not Iceberg · Manual upload, no Data Connection |
-| 2026-10-18 | [SNAP by ZCTA](journal/2026-10-18-snap-by-zcta/) | Union the extracts, don't join them |
+| 2026-10-18 | [SNAP by ZCTA](journal/2026-10-18-snap-by-zcta/) | Union the extracts, don't join them · *Superseded 2026-11-10 by the Census API fetch* |
 | 2026-10-25 | [ZCTA polygons on a Foundry map](journal/2026-10-25-zcta-polygons/) | TIGER polygons, not lat/long points |
 | 2026-11-04 | [PLACES: need layer 1](journal/2026-11-04-places-need-layer-1/) | Two need layers, direct then indirect · PLACES properties, TIGER geometry · One object per ZCTA · Choropleth, not heatmap |
 | 2026-11-09 | [Modeling the need layer](journal/2026-11-09-need-modeling/) | Combine direct and indirect with z-scores · Rules set before computing |

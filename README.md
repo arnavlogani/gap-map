@@ -10,7 +10,7 @@ Gap Map shades every ZIP code area in Nassau and Suffolk counties by a modeled e
 
 ## What you're looking at
 
-- **Need:** the share of people in each ZIP code area who don't reliably have enough to eat.
+- **Need:** how food need in each ZIP code area ranks against the rest of Long Island, from 1 (lowest) to 5 (highest).
 - **Supply:** food banks, pantries, and agencies, with their hours and capacity.
 - **Gap:** places where need is high and supply is low. These are the areas to act on first.
 
