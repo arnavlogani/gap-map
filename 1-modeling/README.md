@@ -80,7 +80,7 @@ The code picks the w where need_score's rank correlation with each source is mos
 
 ## Code
 
-Run in order. Each script runs health checks on its output: row count, unique `zcta5`, rate ranges, explained nulls.
+Run in order. The last three scripts assert health checks on their output: row count, unique `zcta5`, rate ranges, explained nulls.
 
 | Script | Does |
 |---|---|
